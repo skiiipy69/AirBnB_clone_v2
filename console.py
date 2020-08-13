@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
+# import re
 import cmd
 import sys
 from shlex import split
@@ -160,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.all()[key])
         except KeyError:
             print("** no instance found **")
 
@@ -171,13 +172,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ Destroys a specified object """
-        new = args.partition(" ")
-        c_name = new[0]
-        c_id = new[2]
-        if c_id and ' ' in c_id:
-            c_id = c_id.partition(' ')[0]
+        args = args.split()
+        c_name = args[0]
+        c_id = args[1]
 
-        if not c_name:
+        if c_name is None:
             print("** class name missing **")
             return
 
@@ -185,17 +184,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        if not c_id:
+        if c_id is None:
             print("** instance id missing **")
             return
 
         key = c_name + "." + c_id
-
-        try:
-            del(storage.all()[key])
-            storage.save()
-        except KeyError:
+        if key not in storage.all().keys(): 
             print("** no instance found **")
+            return
+        else:
+            storage.delete(storage.all()[key])
+            storage.save()
 
     def help_destroy(self):
         """ Help information for the destroy command """
@@ -228,7 +227,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for k, v in storage._FileStorage__objects.items():
+        for k, v in storage.all().items():
             if args == k.split('.')[0]:
                 count += 1
         print(count)

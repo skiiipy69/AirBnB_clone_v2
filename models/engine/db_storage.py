@@ -44,7 +44,6 @@ class DBStorage():
         for obj in objects:
             key = '{}.{}'.format(type(obj).__name__, obj.id)
             my_dict[key] = obj
-        # print('my_dict returned from db_storage.DBstorage.all():', my_dict)
         return my_dict
 
     def new(self, obj):
