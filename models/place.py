@@ -2,6 +2,8 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
+from sqlalchemy.orm import relationship
+from os import getenv
 
 
 class Place(BaseModel, Base):
@@ -18,3 +20,16 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        reviews = relationship('Review', backref='place',
+                               cascade='all, delete-orphan')
+    else:
+        @property
+        def reviews(self):
+            """Return list of Review instances with place_id equal to the
+            current Place.id"""
+            list_reviews = []
+            for review in models.storage.all(Review).values:
+                if self.id == review.place_id:
+                    list_reviews.append(review)
+            return list_reviews
