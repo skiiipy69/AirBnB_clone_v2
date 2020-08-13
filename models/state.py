@@ -3,7 +3,7 @@
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from .base_model import BaseModel
-from .base_model import Base
+# from .base_model import Base
 from . import storage
 
 
@@ -15,10 +15,11 @@ class State(BaseModel):
         name (Column): name of state, string of max 128 chars
         cities (relationship): one-to-many-association to `City`
     """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete-orphan",
-                          backref="state")
+    # __tablename__ = 'states'
+    # name = Column(String(128), nullable=False)
+    # cities = relationship("City", cascade="all, delete-orphan",
+    #                       backref="state")
+    name = ""
 
     @property
     def cities(self):
