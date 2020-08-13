@@ -2,8 +2,8 @@
 """ 0x02. AirBnB clone - MySQL, task 6. DBStorage - States and Cities """
 from sqlalchemy import Column, String
 from sqlalchemy.schema import ForeignKey
-from models.base_model import BaseModel
-from models.base_model import Base
+from models.base_model import BaseModel, Base
+from sqlalchemy.orm import relationship
 
 
 class City(BaseModel, Base):
@@ -17,3 +17,5 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+    places = relationship('Place', backref='cities',
+                          cascade='all, delete-orphan')
