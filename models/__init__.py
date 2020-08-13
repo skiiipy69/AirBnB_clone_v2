@@ -7,7 +7,7 @@ from os import environ
 
 if 'HBNB_TYPE_STORAGE' in environ:
     if environ['HBNB_TYPE_STORAGE'] == 'db':
-        import DBStorage
+        from.engine.db_storage import DBStorage
         storage = DBStorage()
         storage.reload()
 
