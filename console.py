@@ -212,12 +212,20 @@ class HBNBCommand(cmd.Cmd):
                 return
             for k, v in storage.all().items():
                 if k.split('.')[0] == args:
-                    print_list.append(str(v))
+                    print_list.append(v)
         else:
             for k, v in storage.all().items():
-                print_list.append(str(v))
+                print_list.append(v)
 
-        print(print_list)
+        print('[', end='')
+        for obj in print_list:
+            if obj is print_list[-1]:
+                end = ''
+            else:
+                end = ', '
+            print(obj, end=end)
+        print(']')
+        #print([obj.__str__ for obj in print_list])
 
     def help_all(self):
         """ Help information for the all command """
