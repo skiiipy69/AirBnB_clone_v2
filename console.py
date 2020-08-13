@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    prompt = '(hbnb) ' # if sys.__stdin__.isatty() else ''
+    prompt = '(hbnb) '  # if sys.__stdin__.isatty() else ''
 
     classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -189,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         key = c_name + "." + c_id
-        if key not in storage.all().keys(): 
+        if key not in storage.all().keys():
             print("** no instance found **")
             return
         else:
@@ -225,7 +225,6 @@ class HBNBCommand(cmd.Cmd):
                 end = ', '
             print(obj, end=end)
         print(']')
-        #print([obj.__str__ for obj in print_list])
 
     def help_all(self):
         """ Help information for the all command """

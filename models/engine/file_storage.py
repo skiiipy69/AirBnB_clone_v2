@@ -9,7 +9,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """ Returns a dictionary of models currently in storage, or all of 
+        """ Returns a dictionary of models currently in storage, or all of
         one type.
 
         Args:
