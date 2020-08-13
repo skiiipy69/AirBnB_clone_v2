@@ -2,14 +2,12 @@
 """ 0x02. AirBnB clone - MySQL, task 6. DBStorage - States and Cities """
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from .base_model import BaseModel
-from .base_model import Base
+from .base_model import BaseModel, Base
 
 
 class State(BaseModel, Base):
     """Defines attributes for `State` as it inherits from `BaseModel`,
     and ORM properties in relation to table `states`.
-
     Attributes:
         name (Column): name of state, string of max 128 chars
         cities (relationship): one-to-many-association to `City`
