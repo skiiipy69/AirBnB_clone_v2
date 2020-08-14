@@ -170,31 +170,26 @@ class HBNBCommand(cmd.Cmd):
         print("Shows an individual instance of a class")
         print("[Usage]: show <className> <objectId>\n")
 
-    def do_destroy(self, args):
+    def do_destroy(self, line):
         """ Destroys a specified object """
-        args = args.split()
-        c_name = args[0]
-        c_id = args[1]
+        args = line.split()
 
-        if c_name is None:
+        if len(args) == 0:
             print("** class name missing **")
-            return
 
-        if c_name not in HBNBCommand.classes:
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return
 
-        if c_id is None:
+        elif len(args) == 1:
             print("** instance id missing **")
-            return
 
-        key = c_name + "." + c_id
-        if key not in storage.all().keys():
-            print("** no instance found **")
-            return
         else:
-            storage.delete(storage.all()[key])
-            storage.save()
+            key = args[0] + "." + args[1]
+            if key not in storage.all().keys():
+                print("** no instance found **")
+            else:
+                storage.delete(storage.all()[key])
+                storage.save()
 
     def help_destroy(self):
         """ Help information for the destroy command """
@@ -235,7 +230,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def help_count(self):
-        """ """
+        """ Help information for the count command """
         print("Usage: count <class_name>")
 
     def do_update(self, args):
@@ -313,9 +308,12 @@ class HBNBCommand(cmd.Cmd):
                     print("** value missing **")
                     return
                 # type cast as necessary
-                if att_name in HBNBCommand.types:
-                    att_val = HBNBCommand.types[att_name](att_val)
-
+                # if att_name in HBNBCommand.types:
+                #     att_val = HBNBCommand.types[att_name](att_val)
+                try:
+                    att_val = eval(att_val)
+                except:
+                    pass
                 # update dictionary with name, value pair
                 new_dict.__dict__.update({att_name: att_val})
 
