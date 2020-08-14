@@ -9,6 +9,7 @@ from .place import place_amenity
 class Amenity(BaseModel, Base):
     """ Defines attributes for `Amenity` as it inherits from `BaseModel`,
     and ORM properties in relation to table `amenities`.
+
     Attributes:
         name (Column): name of state, string of max 128 chars
         amenities (relationship): many-to-many-association to `Place`
