@@ -5,8 +5,6 @@ from fabric.api import local, env
 from os import path, makedirs, listdir
 from datetime import datetime
 
-env.hosts = ['localhost']
-
 
 def do_pack():
     """ Generates a .tgz archive from the contents `web_static/` in AirBnB clone
@@ -14,7 +12,7 @@ def do_pack():
 
     Retruns:
         (str): full path from current directory to `.tgz` archive created in
-    `versions/`
+    `versions/`, or `None` on failure
     """
     if not path.isdir("./versions"):
         makedirs("./versions")
