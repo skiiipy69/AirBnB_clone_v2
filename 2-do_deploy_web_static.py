@@ -15,7 +15,7 @@ def do_deploy(archive_path):
     Retruns:
         (bool): `True` if all operations successful, `False` otherwise
     """
-    if not path.exists(archive_path):
+    if not path.exists(archive_path) or archive_path is None:
         return False
 
     f_name = path.basename(archive_path)
@@ -23,7 +23,7 @@ def do_deploy(archive_path):
 
     put(local_path=archive_path, remote_path='/tmp/')
     run('mkdir -p /data/web_static/releases/{}/'.format(d_name))
-    run('run: tar -xzf /tmp/{} -C /data/web_static/releases/{}/'.format(
+    run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'.format(
         f_name, d_name))
     run('rm /tmp/{}'.format(f_name))
     run('mv /data/web_static/releases/{}/web_static/* '.format(d_name) +
