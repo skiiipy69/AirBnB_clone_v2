@@ -8,8 +8,8 @@ env.user = 'ubuntu'
 
 
 def do_clean(number=0):
-    """ Deletes out-of-date .tgz archives of `web_static/` created by `do_pack`
-    in 3-deploy_web_static.py.
+    """ Deletes out-of-date .tgz archives of `web_static/`, both local and
+    remote, created by `do_pack`.
 
     Args:
        (str): number of archives, including the most recent, to keep. If 0 or
@@ -32,4 +32,3 @@ def do_clean(number=0):
                      'sed -e "s/^/\/data\/web_static\/releases\//"',
                      '| xargs rm -rf'))
     run(pipe)
-    return True
