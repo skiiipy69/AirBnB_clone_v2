@@ -29,6 +29,6 @@ def do_clean(number=0):
     pipe = ' '.join(('ls -t /data/web_static/releases/ |',
                      'sed -e "/test/d" |',
                      'tail -n +{:d} |'.format(number+1),
-                     'sed -e "s/^/\/data\/web_static\/releases\//"',
-                     '| xargs rm -rf'))
+                     'sed -e "s/^/\/data\/web_static\/releases\//" |',
+                     'xargs rm -rf'))
     run(pipe)
