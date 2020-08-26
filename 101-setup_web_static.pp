@@ -45,6 +45,7 @@ file { 'symbolic link to test/ dir':
   ensure  => link,
   path    => '/data/web_static/current',
   target  => '/data/web_static/releases/test',
+  replace => true,
   require => File['sample web content'],
 }
 
