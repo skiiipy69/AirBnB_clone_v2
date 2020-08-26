@@ -36,6 +36,8 @@ $content = "<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </bod
 file { 'sample web content':
   ensure  => file,
   path    => '/data/web_static/releases/test/index.html',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   content => $content,
   require => File['/data/web_static/releases/test'],
 }
@@ -44,8 +46,10 @@ file { 'sample web content':
 file { 'symbolic link to test/ dir':
   ensure  => link,
   path    => '/data/web_static/current',
-  target  => '/data/web_static/releases/test',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   replace => true,
+  target  => '/data/web_static/releases/test',
   require => File['sample web content'],
 }
 
