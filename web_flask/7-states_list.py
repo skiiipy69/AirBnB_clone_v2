@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""0x04. AirBnB clone - Web framework, task 6. Odd or even?
+"""0x04. AirBnB clone - Web framework, task 8. List of states
 """
 from flask import Flask, render_template
 from os import environ
@@ -23,9 +23,13 @@ def states_list():
     """ Requests list of `State`s ordered by name, which populates HTML
     template served to '/states_list'.
     """
-    session = storage._DBStorage__session
-    states_sorted = session.query(State).order_by(State.name).all()
-    return render_template('7-states_list.html', states=states_sorted)
+    # session = storage._DBStorage__session
+    # states_sorted = session.query(State).order_by(State.name).all()
+
+    # states = storage.all(State).values()
+    # states_sorted = sorted(states, key=lambda state: state.name)
+
+    return render_template('7-states_list.html', states=storage.all(State))
 
 
 app.run()
