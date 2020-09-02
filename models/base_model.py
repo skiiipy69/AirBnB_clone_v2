@@ -19,17 +19,22 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """ Instantiates a new model """
-        if kwargs:
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            self.updated_at = self.created_at = datetime.now()
+        else:
             for key, value in kwargs.items():
-                if key == "created_at" or key == "updated_at":
+                if key == 'created_at' or key == 'updated_at':
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key != "__class__":
+                if key not in ('__class__', '_sa_instance_state'):
                     setattr(self, key, value)
             if not self.id:
                 self.id = str(uuid.uuid4())
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
+            timestamp = datetime.now()
+            if 'created_at' not in kwargs:
+                self.created_at = timestamp
+            if 'updated_at' not in kwargs:
+                self.updated_at = timestamp
 
     def __str__(self):
         """ Returns a string representation of the instance """
@@ -43,7 +48,7 @@ class BaseModel:
         """ Updates updated_at with current time when instance is changed """
         from . import storage  # here instead of top to avoid circular import
         self.updated_at = datetime.now()
-        storage.new(self)  # per instructions, but not clear why
+        storage.new(self)
         storage.save()
 
     def to_dict(self):

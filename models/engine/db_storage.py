@@ -65,7 +65,16 @@ class DBStorage():
         """ Create all tables in the database and create the current database
         session from the engine """
         # Base.metadata.create_all(self.__engine)  # redundant with __init__?
-        self.__session = sessionmaker(bind=self.__engine,
-                                      expire_on_commit=False)
-        Session = scoped_session(self.__session)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
+        Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        """ Closes current SQLAlchemy session, discarding unsaved changes and
+        updating `storage` with current state of DB.
+
+        Project: 0x04. AirBnB clone - Web framework
+        Task: 7. Improve engines
+        """
+        self.__session.close()

@@ -2,7 +2,9 @@
 """ 0x02. AirBnB clone - MySQL, task 6. DBStorage - States and Cities """
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from .city import City
 from .base_model import BaseModel, Base
+from os import getenv
 
 
 class State(BaseModel, Base):
@@ -17,13 +19,15 @@ class State(BaseModel, Base):
     cities = relationship("City", cascade="all, delete-orphan",
                           backref="state")
 
-    @property
-    def cities(self):
-        """ Getter for `cities` when in file storage mode. """
-        from . import storage
-        cities = []
-        for obj in storage._FileStorage__objects.values():
-            if obj.__class__.__name__ == 'City':
-                if obj.state_id == self.id:
-                    cities.append(obj)
-        return cities
+    if getenv('HBNB_TYPE_STORAGE') != 'db':
+        @property
+        def cities(self):
+            """ Getter for list of all `City` objects when in file storage
+            mode.
+            """
+            from . import storage
+            cities = []
+            for city in storage.all(City).values():
+                if city.state_id == self.id:
+                    cities.append(city)
+            return cities
