@@ -34,7 +34,7 @@
 				</div>
 				<div class="amenities">
 					<h3>Amenities</h3>
-					<h4>>&nbsp;</h4>
+					<h4>&nbsp;</h4>
 					<ul class="popover">
 					  {% for amenity in amenities.values() | sort(attribute="name") %}
                                           <li><h4>{{amenity.name}}</h4></li>
@@ -65,11 +65,11 @@
 							<p>{{place.number_bathrooms}} Bathroom</p>
 						</div>
 					</div>
-					{% for user in users.values() | selectattr("id", "equalto", place.user_id) %}
-					<div class="user"><b>Owner</b>: {{user.name}}</div>
-					{% endfor %}
+					<div class="user"><b>Owner</b>: {{place.user.first_name}} {{place.user.last_name}}</div>
 					<div class="description">
-                        {{place.description}}
+					  {% autoescape false %}
+					  {{place.description}}
+					  {% endautoescape %}
 					</div>
 				</article>
 				{% endfor %}
