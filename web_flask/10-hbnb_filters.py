@@ -21,7 +21,7 @@ def states_list_teardown(self):
 
 
 @app.route('/hbnb_filters', strict_slashes=False)
-def cities_by_states():
+def hbnb_filters():
     """ Requests dicts of `State`, `City`, and `Amenity` objects, which then
     populate the HTML template served to '/hbnb_filters'.
     """

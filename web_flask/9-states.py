@@ -20,7 +20,7 @@ def states_list_teardown(self):
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def cities_by_states(id=None):
+def states(id=None):
     """ Requests list of `State`s ordered by name, which populates HTML
     template served to '/cities_by_states'.
     """
