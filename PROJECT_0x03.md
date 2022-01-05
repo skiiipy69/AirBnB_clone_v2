@@ -12,7 +12,7 @@ Guillaume Salva
 ### Description
 Second of three projects building the second iteration of a website cloning the basic features of the [`airbnb.com` main page, circa 2014-2017](https://web.archive.org/web/20170206112507/https://www.airbnb.com/).
 
-Revisiting Continuous Integration/Continuous Deployment and Nginx concepts from [`holberton-system_engineering-devops`](https://github.com/allelomorph/holberton-system_engineering-devops), plus an intrduction to the Python library Fabric. Deploying the static web content from [(268) 0x01. AirBnB clone - Web static](https://github.com/allelomorph/AirBnB_clone/PROJECT_0x01.md) to a simple architecture of two web servers and one load balancer.
+Revisiting Continuous Integration/Continuous Deployment and Nginx concepts from [`holberton-system_engineering-devops`](https://github.com/allelomorph/holberton-system_engineering-devops), plus an intrduction to the Python library Fabric. Deploying the static web content from [(268) 0x01. AirBnB clone - Web static](https://github.com/allelomorph/AirBnB_clone/blob/master/PROJECT_0x01.md) to a simple architecture of two web servers and one load balancer.
 
 ## General requirements
 
