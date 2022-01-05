@@ -1,3 +1,23 @@
+**Note**:
+
+The AirBnB project arc, part of Holberton School's [Higher-level Programming track](https://github.com/allelomorph/holbertonschool-higher_level_programming/), spans 7 assignments and 4 repositories. All were team projects. In order to practice navigating an existing code base, for v2 through v4, students began that revision by forking a senior student team's repository for the previous version.
+
+* [`AirBnB_clone`](https://github.com/allelomorph/AirBnB_clone/)
+  * [(263) 0x00. AirBnB clone - The console](https://github.com/allelomorph/AirBnB_clone/PROJECT_0x00.md)
+  * [(268) 0x01. AirBnB clone - Web static](https://github.com/allelomorph/AirBnB_clone/PROJECT_0x01.md)
+* `AirBnB_clone_v2`
+  * [(289) 0x02. AirBnB clone - MySQL](./PROJECT_0x02.md)
+  * [(288) 0x03. AirBnB clone - Deploy static](./PROJECT_0x03.md)
+  * [(290) 0x04. AirBnB clone - Web framework](./PROJECT_0x04.md)
+* [`AirBnB_clone_v3`](https://github.com/allelomorph/AirBnB_clone_v3/)
+  * [(301) 0x05. AirBnB clone - RESTful API](https://github.com/allelomorph/AirBnB_clone_v3/PROJECT_0x05.md)
+* [`AirBnB_clone_v4`](https://github.com/allelomorph/AirBnB_clone_v4/)
+  * [(309) 0x06. AirBnB clone - Web dynamic](https://github.com/allelomorph/AirBnB_clone_v4/PROJECT_0x06.md)
+
+What follows below is an edited version of the README appearing in the forked v1 repository.
+
+---
+
 <center> <h1>AirBnB clone - MySQL</h1> </center>
 
 This repository contains the third stage of a student project to build a clone an early version of the AirBnB website. The first stage implemented a JSON based file storage system and a REPL console to manage these objects in storage. In the second project students built static HTML and CSS for the front end. This stage now implements a second data storage engine, this time in a MySQL database, and the ability to switch between both means of storage. A new challenge was introduced also introduced for this project: starting not with the student's completed work from the first two stages, but with that of a student of a prior cohort, to practice working with a pre-existing code base.
