@@ -1,36 +1,27 @@
 #!/usr/bin/env bash
-# prepares simple nginx servers for static deployment of `web-static`
-service nginx status
-if (( $? != 0 )); then
-    apt-get -y update
-    apt-get -y install nginx
-    find /var/www/html/index.html
-    if (( $? != 0 )); then
-        mkdir -p /var/www/html/
-        echo 'Holberton School' > /var/www/html/index.html
-    fi
-    service nginx restart
-fi
+# script that sets up web servers for the deployment of web_static
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 
-mkdir -p /data/web_static/shared/
-find /data/web_static/releases/test/index.html
-if (( $? != 0 )); then
-    mkdir -p /data/web_static/releases/test/
-    echo "<html>
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
+sudo touch /data/web_static/releases/test/index.html
+sudo echo "<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>" > /data/web_static/releases/test/index.html
-    ln -sf /data/web_static/releases/test/ /data/web_static/current
-fi
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
-chown -R ubuntu:ubuntu /data/
+sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 
-grep -q "location \/hbnb_static\/ {$" /etc/nginx/sites-available/default
-if (( $? != 0 )); then
-    cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bup
-    sed -i "0,/^\tlocation \/ {$/s/^\tlocation \/ {$/\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current\/;\n\t\tautoindex off;\n\t}\n\n\tlocation \/ {/" /etc/nginx/sites-available/default
-    service nginx reload
-fi
+sudo chown -R ubuntu:ubuntu /data/
+
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
